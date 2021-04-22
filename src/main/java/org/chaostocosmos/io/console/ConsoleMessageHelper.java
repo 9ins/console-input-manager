@@ -38,14 +38,16 @@ public class ConsoleMessageHelper {
     public void load(File yamlFile) throws IOException {
         Yaml yaml = new Yaml();
         FileInputStream fis = new FileInputStream(yamlFile);
-        Map<String, Object> map = (LinkedHashMap<String, Object>) yaml.loadAs(fis, Map.class);
+        final Map<String, Object> map = (LinkedHashMap<String, Object>) yaml.loadAs(fis, Map.class);
         verify(map);
         
         File trademarkFile = new File(map.get("TRADEMARK_FILE")+"");
         if(!trademarkFile.exists()) {
             this.tradeMark = "";
         } else {
-            this.tradeMark = Files.lines(trademarkFile.toPath()).collect(Collectors.joining(System.lineSeparator()));
+            this.tradeMark = Files.lines(trademarkFile.toPath())
+                                .map(l -> l.contains("@version") ? l.replace("@version", map.get("VERSION")+"") : l)
+                                .collect(Collectors.joining(System.lineSeparator()));
         }
         this.title = map.get("TITLE")+"";
         this.querys = (LinkedHashMap<String, String>)map.get("QUERYS");

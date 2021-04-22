@@ -18,10 +18,19 @@ public class ConsoleInput {
     String title;
     String conti;
     Map<String, String> querys;
-    ConsoleTrigger trigger;
-
     BufferedReader reader;
     PrintStream out;
+
+    ConsoleTrigger trigger;
+
+    /**
+     * Constructor
+     * @param messageHelper
+     * @throws Exception
+     */
+    public ConsoleInput(ConsoleMessageHelper messageHelper) throws Exception {
+        this(messageHelper, null);
+    }
 
     /**
      * Constructor
@@ -104,4 +113,12 @@ public class ConsoleInput {
         this.out.print(query);
         return reader.readLine();
     }    
+
+    /**
+     * Set trigger object to be continue process.
+     * @param trigger
+     */
+    public void setTrigger(ConsoleTrigger trigger) {
+        this.trigger = trigger;
+    }
 }

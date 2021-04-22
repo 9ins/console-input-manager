@@ -1,6 +1,7 @@
 # Console App messages
 
 TRADEMARK_FILE: './trademark'
+VERSION: '3.0.0'
 
 TITLE: 'This is title.'
 
