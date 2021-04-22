@@ -2,8 +2,8 @@
 
 This library help you to build console input process on your console application.
 
-```java
 <span style="color:black">
+```java
 ╔╦╗┌─┐┬┌─┌─┐  ╦ ╦┌─┐┬ ┬┬─┐  ╔═╗┌─┐┌─┐
 ║║║├─┤├┴┐├┤   ╚╦╝│ ││ │├┬┘  ╠═╣├─┘├─┘
 ╩ ╩┴ ┴┴ ┴└─┘   ╩ └─┘└─┘┴└─  ╩ ╩┴  ┴
@@ -21,5 +21,5 @@ And manage a queries for Application more easily
 
 This is message 001
 This is query 001 :
-</span>
 ```
+</span>
