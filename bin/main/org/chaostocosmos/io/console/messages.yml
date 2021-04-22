@@ -1,9 +1,10 @@
 # Console App messages
 
 TRADEMARK_FILE: './trademark'
-VERSION: '3.0.0'
+VERSION: '4.0.0'
 
-TITLE: 'This is title.'
+TITLE: 'Title of Console Application'
+PROLOGUE: 'This library help you to build your Console Application with very easy way \nAnd manage a queries for Application more easily'
 
 QUERYS:
   MESSAGE001: 'This is message 001'

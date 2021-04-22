@@ -17,6 +17,7 @@ public class ConsoleMessageHelper {
     private File yamlFile;
     private String tradeMark;
     private String title;
+    private String prologue;
     private LinkedHashMap<String, String> querys;
     private String conti;
 
@@ -49,21 +50,14 @@ public class ConsoleMessageHelper {
                                 .map(l -> l.contains("@version") ? l.replace("@version", map.get("VERSION")+"") : l)
                                 .collect(Collectors.joining(System.lineSeparator()));
         }
-        this.title = map.get("TITLE")+"";
+        System.out.println(map.get("PROLOGUE"));
+        this.title = map.get("TITLE") != null ? map.get("TITLE").toString() : "";
+        this.prologue = map.get("PROLOGUE") != null ? map.get("PROLOGUE").toString() : "";
         this.querys = (LinkedHashMap<String, String>)map.get("QUERYS");
-        this.conti = map.get("CONTINUE")+"";
+        this.conti = map.get("CONTINUE") != null ? map.get("CONTINUE").toString() : "";
     }
 
     public void verify(Map<String, Object> map) {
-        if(map.get("TRADEMARK_FILE") == null) {
-            throw new IllegalArgumentException("Missing TRADEMARK_FILE key in YAML file !!!");
-        }
-        if(map.get("TITLE") == null) {
-            throw new IllegalArgumentException("Missing TITLE key in YAML file !!!");
-        }
-        if(map.get("QUERYS") == null) {
-            throw new IllegalArgumentException("Missing QUERYS key in YAML file !!!");
-        }
     }
 
     public File getYamlFile() {
@@ -76,6 +70,10 @@ public class ConsoleMessageHelper {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public String getPrologue() {
+        return this.prologue;
     }
 
     public LinkedHashMap<String, String> getQuerys() {

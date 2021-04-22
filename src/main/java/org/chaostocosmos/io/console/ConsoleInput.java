@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * ConsoleInput class
@@ -16,6 +19,7 @@ public class ConsoleInput {
 
     String tradeMark;
     String title;
+    String prologue;
     String conti;
     Map<String, String> querys;
     BufferedReader reader;
@@ -39,21 +43,23 @@ public class ConsoleInput {
      * @throws Exception
      */
     public ConsoleInput(ConsoleMessageHelper helper, ConsoleTrigger trigger) throws Exception {
-        this(helper.getTradeMark(), helper.getTitle(), helper.getQuerys(), trigger);
+        this(helper.getTradeMark(), helper.getTitle(), helper.getPrologue(), helper.getQuerys(), trigger);
     }
 
     /**
      * Constructor
      * @param tradeMark
      * @param title
+     * @param prologue
      * @param querys
      * @param trigger
      * @throws Exception
      */
-    public ConsoleInput(String tradeMark, String title, LinkedHashMap<String, String> querys, ConsoleTrigger trigger) throws Exception {
+    public ConsoleInput(String tradeMark, String title, String prologue, LinkedHashMap<String, String> querys, ConsoleTrigger trigger) throws Exception {
         this.tradeMark = tradeMark;
         this.title = title;
         this.querys = querys;
+        this.prologue = prologue;
         this.conti = querys.remove("CONTINUE");
         this.trigger = trigger;
         this.reader = new BufferedReader(new InputStreamReader(System.in));
@@ -61,6 +67,9 @@ public class ConsoleInput {
         this.out.println(this.tradeMark);
         this.out.println();
         this.out.println(this.title);
+        this.out.println();
+        Arrays.asList(this.prologue.split(Pattern.quote("\\n"))).stream().forEach(l -> this.out.println(l));
+        this.out.println();
         startQuery();
     }
     

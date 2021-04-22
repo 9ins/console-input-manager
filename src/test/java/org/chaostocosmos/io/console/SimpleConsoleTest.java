@@ -13,6 +13,10 @@ public class SimpleConsoleTest implements ConsoleTrigger {
 
     ConsoleInput consoleInput;
 
+    SimpleConsoleTest() throws Exception {
+        createConsoleInputTest();
+    }
+
     @Before
     public void createConsoleInputTest() throws Exception {
         File messageFile = new File(ConsoleFactory.class.getResource("messages.yml").toURI().getPath());
@@ -33,4 +37,8 @@ public class SimpleConsoleTest implements ConsoleTrigger {
     public void canceled() {
         System.out.println("Console canceled...");        
     }   
+
+    public static void main(String[] args) throws Exception {
+        new SimpleConsoleTest().consoleInputTest();
+    }
 }
