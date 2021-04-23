@@ -30,7 +30,8 @@ public class SimpleConsoleTest implements ConsoleTrigger {
     
     @Override
     public void trigger(Map<String, String> inputMap) throws Exception {
-        inputMap.entrySet().stream().forEach(e -> System.out.println("key: "+e.getKey()+"   value: "+e.getValue()));        
+        System.out.println("========== Receive input map ==========");
+        inputMap.entrySet().stream().forEach(e -> System.out.println("key: "+e.getKey()+"   value: "+e.getValue()));
     }
 
     @Override
