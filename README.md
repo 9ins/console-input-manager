@@ -8,7 +8,7 @@
 
 ## Introduction
 
-This library help you to build Java console input process on your console application with easist way of way.
+This library help you to build Java console input process on your console application with easiest way of way.
 
 Also it's provide more effective and easy way of development console application.
 
