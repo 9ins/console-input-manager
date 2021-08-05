@@ -9,7 +9,7 @@ import java.util.Map;
 public class ConsoleFactory {
 
     /**
-     * Get default console input object
+     * Get default console input object 
      * @param yamlFile
      * @param triggered
      * @return
