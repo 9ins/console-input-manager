@@ -85,6 +85,9 @@ public class ConsoleInput {
             for(String key : keys) {
                 if(key.startsWith("QUERY")) {
                     String input = query(this.reader, this.querys.get(key));
+                    if(input == null) {
+                        return;
+                    }
                     if(input.equals("q") || input.equals("quit") || input.equals("exit") || input.equals("cancel")) {
                         if(this.trigger != null) {
                             this.trigger.canceled();
