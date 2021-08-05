@@ -103,6 +103,7 @@ public class ConsoleInput {
             } 
             if(this.conti != null) {                
                 String yn = query(this.reader, this.conti);
+                System.out.println(yn);
                 if(yn.equals("n") || yn.equals("no")) {
                     this.out.println("Farewell :)");
                     break;

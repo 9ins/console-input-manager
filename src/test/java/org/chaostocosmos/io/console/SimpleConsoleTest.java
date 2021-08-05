@@ -13,19 +13,19 @@ public class SimpleConsoleTest implements ConsoleTrigger {
 
     ConsoleInput consoleInput;
 
-    SimpleConsoleTest() throws Exception {
-        createConsoleInputTest();
+    public SimpleConsoleTest() throws Exception {
+        //createConsoleInputTest();
     }
 
-    @Before
+    //@Before
     public void createConsoleInputTest() throws Exception {
-        File messageFile = new File(ConsoleFactory.class.getResource("messages.yml").toURI().getPath());
+        File messageFile = new File("D:\\InnoQuartz\\2. Product\\Projects\\repository-downloader\\messages.yml");
         this.consoleInput = ConsoleFactory.getDefaultConsoleInput(messageFile, this);
     }
 
-    @Test
+    //@Test
     public void consoleInputTest() throws Exception {
-        this.consoleInput.startQuery();
+        //this.consoleInput.startQuery();
     }
     
     @Override
@@ -40,6 +40,6 @@ public class SimpleConsoleTest implements ConsoleTrigger {
     }   
 
     public static void main(String[] args) throws Exception {
-        new SimpleConsoleTest().consoleInputTest();
+        new SimpleConsoleTest();
     }
 }

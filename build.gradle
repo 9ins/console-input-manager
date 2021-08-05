@@ -5,10 +5,71 @@
  * For more details take a look at the Java Libraries chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.6/userguide/java_library_plugin.html
  */
+apply plugin: 'maven'
+apply plugin: 'signing'
+apply plugin: 'java-library'
 
-plugins {
-    // Apply the java-library plugin to add support for Java Library
-    id 'java-library'
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+group = "io.github.9ins"
+archivesBaseName = "console-input-manager"
+version = "1.0.0"
+
+signing {
+    sign configurations.archives
+}
+
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name 'console-input-manager'
+        packaging 'jar'
+        description ''
+        url 'https://github.com/9ins/console-input-manager'
+        scm {
+          connection 'scm:svn:https://github.com/9ins/console-input-manager.git'
+          developerConnection 'scm:svn:https://github.com/9ins/console-input-manager.git'
+          url 'https://github.com/9ins/console-input-manager.git'
+        }
+
+        licenses {
+          license {
+            name 'The Apache License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'chaos930'
+            name 'Kooin-Shin '
+            email 'chaos930@gmail.com'
+          }
+        }
+      }
+    }
+  }
 }
 
 repositories {
