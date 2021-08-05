@@ -8,7 +8,7 @@
 
 ## Introduction
 
-This library help you to build Java console input process on your console application. 
+This library help you to build Java console input process on your console application with easiest way of way.
 
 Also it's provide more effective and easy way of development console application.
 
@@ -99,9 +99,8 @@ public class SimpleConsoleTest implements ConsoleTrigger {
         //Create File object for message.yml
         File messageFile = new File(ConsoleFactory.class.getResource("messages.yml").toURI().getPath());
         //Create ConsoleInput object using ConsoleFactory
+        //auto start query process
         this.consoleInput = ConsoleFactory.getDefaultConsoleInput(messageFile, this);
-        //Start query process
-        this.consoleInput.startQuery();
     }
 
     @Override
