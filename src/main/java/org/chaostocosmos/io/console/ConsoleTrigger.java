@@ -12,7 +12,7 @@ public interface ConsoleTrigger {
      * @param inputMap
      * @throws Exception
      */
-    public void trigger(Map<String, String> inputMap) throws Exception;
+    public void trigger(Map<String, Object> inputMap) throws Exception;
 
     /**
      * To be processed if caceled while interactive query.

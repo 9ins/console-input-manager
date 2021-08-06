@@ -6,20 +6,17 @@ package org.chaostocosmos.io.console;
 import java.io.File;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test; 
-
 public class SimpleConsoleTest implements ConsoleTrigger { 
 
     ConsoleInput consoleInput;
 
     public SimpleConsoleTest() throws Exception {
-        //createConsoleInputTest();
+        createConsoleInputTest();
     }
 
     //@Before
     public void createConsoleInputTest() throws Exception {
-        File messageFile = new File("D:\\InnoQuartz\\2. Product\\Projects\\repository-downloader\\messages.yml");
+        File messageFile = new File("D:\\Github\\console-input-manager\\messages.yml");
         this.consoleInput = ConsoleFactory.getDefaultConsoleInput(messageFile, this);
     }
 
@@ -29,7 +26,7 @@ public class SimpleConsoleTest implements ConsoleTrigger {
     }
     
     @Override
-    public void trigger(Map<String, String> inputMap) throws Exception {
+    public void trigger(Map<String, Object> inputMap) throws Exception {
         System.out.println("========== Receive input map ==========");
         inputMap.entrySet().stream().forEach(e -> System.out.println("key: "+e.getKey()+"   value: "+e.getValue()));
     }

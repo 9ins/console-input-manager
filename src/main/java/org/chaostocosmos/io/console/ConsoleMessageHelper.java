@@ -18,7 +18,7 @@ public class ConsoleMessageHelper {
     private String tradeMark;
     private String title;
     private String prologue;
-    private LinkedHashMap<String, String> querys;
+    private LinkedHashMap<String, Object> querys;
     private String conti;
 
     /**
@@ -53,11 +53,12 @@ public class ConsoleMessageHelper {
         System.out.println(map.get("PROLOGUE"));
         this.title = map.get("TITLE") != null ? map.get("TITLE").toString() : "";
         this.prologue = map.get("PROLOGUE") != null ? map.get("PROLOGUE").toString() : "";
-        this.querys = (LinkedHashMap<String, String>)map.get("QUERYS");
+        this.querys = (LinkedHashMap<String, Object>)map.get("QUERYS");
         this.conti = map.get("CONTINUE") != null ? map.get("CONTINUE").toString() : "";
     }
 
     public void verify(Map<String, Object> map) {
+        //Implement verifing logic later
     }
 
     public File getYamlFile() {
@@ -76,7 +77,7 @@ public class ConsoleMessageHelper {
         return this.prologue;
     }
 
-    public LinkedHashMap<String, String> getQuerys() {
+    public LinkedHashMap<String, Object> getQuerys() {
         return this.querys;
     }
 

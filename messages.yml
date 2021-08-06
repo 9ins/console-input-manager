@@ -1,0 +1,19 @@
+TRADEMARK_FILE: './trademark'
+VERSION: '4.0.0'
+
+TITLE: 'MVN Repository Downloader'
+PROLOGUE: 'It can be downloaded all of Maven Libraries by using this!'
+
+# https://repo.maven.apache.org/maven2/
+QUERYS:
+  QUERY001: 'MVN repository URL: '
+  QUERY002: 'MVN repository ID(central): '
+  QUERY003: 'MVN repository TYPE(default): '
+  QUERY004: 'Do you wanna input more? (y/n) '  
+  IF001: 'y'
+  GOTO001: 'QUERY001'
+  ELSE001: 
+  QUERY005: 'POM file path: '
+  QUERY006: 'IQDesinger HOME path: '  
+  END: 
+  

@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * ConsoleInput class
@@ -20,8 +20,7 @@ public class ConsoleInput {
     String tradeMark;
     String title;
     String prologue;
-    String conti;
-    Map<String, String> querys;
+    Map<String, Object> querys;
     BufferedReader reader;
     PrintStream out;
 
@@ -55,12 +54,11 @@ public class ConsoleInput {
      * @param trigger
      * @throws Exception
      */
-    public ConsoleInput(String tradeMark, String title, String prologue, LinkedHashMap<String, String> querys, ConsoleTrigger trigger) throws Exception {
+    public ConsoleInput(String tradeMark, String title, String prologue, LinkedHashMap<String, Object> querys, ConsoleTrigger trigger) throws Exception {
         this.tradeMark = tradeMark;
         this.title = title;
         this.querys = querys;
         this.prologue = prologue;
-        this.conti = querys.remove("CONTINUE");
         this.trigger = trigger;
         this.reader = new BufferedReader(new InputStreamReader(System.in));
         this.out = System.out;
@@ -80,23 +78,46 @@ public class ConsoleInput {
      */
     public void startQuery() throws Exception {
         while(true) {
-            Map<String, String> map = new LinkedHashMap<>();
-            List<String> keys = new ArrayList(this.querys.keySet());
-            for(String key : keys) {
-                if(key.startsWith("QUERY")) {
-                    String input = query(this.reader, this.querys.get(key));
+            Map<String, Object> map = new LinkedHashMap<>();
+            List<String> keys = new ArrayList<>(this.querys.keySet());
+            Object input = null;
+            for(int i=0; i<keys.size(); i++) {
+                String key = keys.get(i);
+                //System.out.println(key+"   "+i);
+                if(Pattern.matches("QUERY\\d+", key)) {
+                    input = query(this.reader, this.querys.get(key));
                     if(input == null) {
-                        return;
-                    }
-                    if(input.equals("q") || input.equals("quit") || input.equals("exit") || input.equals("cancel")) {
-                        if(this.trigger != null) {
-                            this.trigger.canceled();
-                        }
-                        return;                        
+                        exit(0);
                     }
                     map.put(key, input);
-                } else if(key.startsWith("MESSAGE")) {
+                } else if(Pattern.matches("MESSAGE\\d+", key)) {
                     this.out.println(this.querys.get(key));
+                    continue;
+                } else if(Pattern.matches("GOTO\\d+", key)) {
+                    AtomicInteger idx = new AtomicInteger();
+                    int index = keys.stream().peek(v -> idx.incrementAndGet()).anyMatch(k -> k.equals(querys.get(key))) ? idx.get() - 1 : -1;
+                    //System.out.println("-----------------"+index+"  "+key+"  "+querys.get(key));
+                    if(index != -1) {
+                        i = index - 1;
+                        //System.out.println(i+"   $$$$$$$$$$$$$");
+                        continue;
+                    }        
+                } else if(Pattern.matches("IF\\d+", key) || Pattern.matches("ELSE\\d+", key)) {                                        
+                    if(keys.size() > i - 1) {
+                        if(Pattern.matches("QUERY\\d+", key)) {
+                            continue;
+                        } else if(Pattern.matches("IF\\d+", key)) {
+                            if(input.equals(this.querys.get(key))) {
+                                continue;
+                            } else {
+                                i++;
+                            }
+                        } else if(Pattern.matches("ELSE\\d+", key)) {
+                            continue;
+                        }
+                    }                
+                } else if(key.equals("END")) {
+                    this.exit(0);
                 }
             }
             if(this.trigger != null) {
@@ -104,15 +125,16 @@ public class ConsoleInput {
                 this.trigger.trigger(map);
                 this.out.println();
             } 
-            if(this.conti != null) {                
-                String yn = query(this.reader, this.conti);
-                System.out.println(yn);
-                if(yn.equals("n") || yn.equals("no")) {
-                    this.out.println("Farewell :)");
-                    break;
-                }
-            }
         }
+    }
+
+    /** 
+     * Exit
+     */
+    protected void exit(int status) {
+        this.trigger.canceled();
+        this.out.println("Farewell :)");
+        System.exit(status);
     }
 
     /**
@@ -122,7 +144,7 @@ public class ConsoleInput {
      * @return
      * @throws IOException
      */
-    private String query(BufferedReader reader, String query) throws IOException {
+    private Object query(BufferedReader reader, Object query) throws IOException {
         this.out.print(query);
         return reader.readLine();
     }    
