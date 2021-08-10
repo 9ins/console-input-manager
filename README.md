@@ -69,18 +69,18 @@ QUERYS:
 #### Definition of key of message file
 
 * **TRADEMARK_FILE** : At the application start up, This file's contents be shown. This could be ASCII art which represent your console application.
-* VERSION: Version of your console application. If you use **@version** variable on trademark file, The variable will be replaced with this key's value.
-* TITLE: Title text which be printed below trademark. It's may be title of your console application.
-* PROLOGUE: This key can be used  as long and detail information of your console application. It could be introduction or snippet of the console application. Line-break can be done by '\n' symbol.
-* QUERYS: This key is section what the separate query be specified for your console application. 
-It's able to use some keyword for expressing informations, queries or logical conditions. Information part is starting with MESSAGE, Query part is starting with QUERY and Logical part is starting with IF, ELSE, GOT, CONTINUE or END.
-* MESSAGE001: This keyword will be able to print as information message. It's printing key's value to STD IO. It must be starting with 'MESSAGE' string.
-* QUERY001: This keyword is query what a user of console application can input what they input in keyboard. Later, input value will be included at result Map object.
-* IF001: This keyword is expressing a condition of upon QUERY. In above sample, if user input is 'y' about QUERY003, it will be goto QUERY001 by GOTO keyword.
-* GOTO001: This keyword is command to move execution position to specified value position.
-* ELSE001: This keyword is executed next keyword if upon IF keyword condition was wrong.
-* CONTINUE: This keyword represent whether gonna termination or restart. if user input 'n' or 'no', will be exit and trigger process on ConsoleTrigger implemented class.
-* END: This keyword represent end of console input process.
+* **VERSION** : Version of your console application. If you use **@version** variable on trademark file, The variable will be replaced with this key's value.
+* **TITLE** : Title text which be printed below trademark. It's may be title of your console application.
+* **PROLOGUE** : This key can be used  as long and detail information of your console application. It could be introduction or snippet of the console application. Line-break can be done by '\n' symbol.
+* **QUERYS** : This key is section what the separate query be specified for your console application. 
+It's able to use some keyword for expressing informations, queries or logical conditions. Information part is starting with **MESSAGE**, Query part is starting with **QUERY** and Logical part is starting with **IF**, **ELSE**, **GOT**, **CONTINUE** or **END**.
+* **MESSAGE001** : This keyword will be able to print as information message. It's printing key's value to STD IO. It must be starting with **'MESSAGE'** string.
+* **QUERY001** : This keyword is query what a user of console application can input what they input in keyboard. Later, input value will be included at result Map object.
+* **IF001** : This keyword is expressing a condition of upon **QUERY**. In above sample, if user input is 'y' about **QUERY003**, it will be goto **QUERY001** by **GOTO** keyword.
+* **GOTO001** : This keyword is command to move execution position to specified value position.
+* **ELSE001** : This keyword is executed next keyword if upon IF keyword condition was wrong.
+* **CONTINUE** : This keyword represent whether gonna termination or restart. if user input 'n' or 'no', will be exit and trigger process on ConsoleTrigger implemented class.
+* **END** : This keyword represent end of console input process.
 
 
 
