@@ -20,7 +20,7 @@ Because of being used with **Snake YAML** library, you should get the library on
 You need to download Jar file on **Release menu** in this project and set this library to classpath on your project. Or Set Maven or Gradle dependancy to your project.
 
  
-## Maven dependancy
+## Maven dependency
 ```xml
 <!-- https://mvnrepository.com/artifact/io.github.9ins/console-input-manager -->
 <dependency>
@@ -31,7 +31,7 @@ You need to download Jar file on **Release menu** in this project and set this l
 ```
 
  
-## Gradle dependancy
+## Gradle dependency
 ```groovy
 // https://mvnrepository.com/artifact/io.github.9ins/console-input-manager
 implementation group: 'io.github.9ins', name: 'console-input-manager', version: '1.0.1' 
