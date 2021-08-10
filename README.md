@@ -68,7 +68,7 @@ QUERYS:
 
 #### Definition of key of message file
 
-* TRADEMARK_FILE : At the application start up, This file's contents be shown. This could be ASCII art which represent your console application.
+* **TRADEMARK_FILE** : At the application start up, This file's contents be shown. This could be ASCII art which represent your console application.
 * VERSION: Version of your console application. If you use **@version** variable on trademark file, The variable will be replaced with this key's value.
 * TITLE: Title text which be printed below trademark. It's may be title of your console application.
 * PROLOGUE: This key can be used  as long and detail information of your console application. It could be introduction or snippet of the console application. Line-break can be done by '\n' symbol.
