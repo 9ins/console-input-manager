@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +24,9 @@ public class ConsoleInput {
     Map<String, Object> querys;
     BufferedReader reader;
     PrintStream out;
-
     ConsoleTrigger trigger;
+    boolean isContinue = false;
+    int exitCode = 0;
 
     /**
      * Constructor
@@ -73,7 +75,6 @@ public class ConsoleInput {
     
     /**
      * Start console input query
-     * @return
      * @throws Exception
      */
     public void startQuery() throws Exception {
@@ -87,9 +88,18 @@ public class ConsoleInput {
                 if(Pattern.matches("QUERY\\d+", key)) {
                     input = query(this.reader, this.querys.get(key));
                     if(input == null) {
-                        exit(0);
+                        exit(-1);
                     }
-                    map.put(key, input);
+                    if(!map.containsKey(key)) {
+                        map.put(key, input);
+                    } else {    
+                        if(map.keySet().stream().filter(k -> k.startsWith(key)).count() == 1) {
+                            map.put(key+"_1", input);
+                        } else {
+                            String key_ = map.keySet().stream().filter(k -> k.startsWith(key+"_")).max(Comparator.comparingInt(k1 -> Integer.parseInt(k1.substring(k1.lastIndexOf("_")+1)))).get();
+                            map.put(key+"_"+(Integer.parseInt(key_.substring(key_.lastIndexOf("_")+1))+1), input);    
+                        }
+                    }                    
                 } else if(Pattern.matches("MESSAGE\\d+", key)) {
                     this.out.println(this.querys.get(key));
                     continue;
@@ -101,7 +111,7 @@ public class ConsoleInput {
                         i = index - 1;
                         //System.out.println(i+"   $$$$$$$$$$$$$");
                         continue;
-                    }        
+                    }
                 } else if(Pattern.matches("IF\\d+", key) || Pattern.matches("ELSE\\d+", key)) {                                        
                     if(keys.size() > i - 1) {
                         if(Pattern.matches("QUERY\\d+", key)) {
@@ -117,14 +127,31 @@ public class ConsoleInput {
                         }
                     }                
                 } else if(key.equals("END")) {
-                    this.exit(0);
+                    this.isContinue = false;
+                    this.exitCode = 0;
+                    break;
+                } else if(key.equals("CONTINUE")) {
+                    input = query(this.reader, this.querys.get(key));
+                    this.exitCode = 0;
+                    if(input != null && ( (input+"").equalsIgnoreCase("y") || (input+"").equalsIgnoreCase("yes") )) {
+                        this.isContinue = true;
+                    } else {
+                        this.isContinue = false;
+                    }
+                    break;
                 }
             }
             if(this.trigger != null) {
                 this.out.println();
-                this.trigger.trigger(map);
+                if(!this.trigger.trigger(map)) {
+                    this.exitCode = -1;
+                    this.isContinue = false;
+                }
                 this.out.println();
-            } 
+            }             
+            if(!this.isContinue) {
+                this.exit(this.exitCode);
+            }
         }
     }
 
@@ -132,7 +159,9 @@ public class ConsoleInput {
      * Exit
      */
     protected void exit(int status) {
-        this.trigger.canceled();
+        if(status != -1) {
+            this.trigger.exit();
+        }
         this.out.println("Farewell :)");
         System.exit(status);
     }

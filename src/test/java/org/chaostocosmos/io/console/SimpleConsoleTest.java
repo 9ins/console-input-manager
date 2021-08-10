@@ -26,13 +26,14 @@ public class SimpleConsoleTest implements ConsoleTrigger {
     }
     
     @Override
-    public void trigger(Map<String, Object> inputMap) throws Exception {
+    public boolean trigger(Map<String, Object> inputMap) throws Exception {
         System.out.println("========== Receive input map ==========");
         inputMap.entrySet().stream().forEach(e -> System.out.println("key: "+e.getKey()+"   value: "+e.getValue()));
+        return true;
     }
 
     @Override
-    public void canceled() {
+    public void exit() {
         System.out.println("Console canceled...");        
     }   
 

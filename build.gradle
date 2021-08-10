@@ -5,10 +5,16 @@
  * For more details take a look at the Java Libraries chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.6/userguide/java_library_plugin.html
  */
+apply plugin: 'java'
+apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
-apply plugin: 'java-library'
 
+group = "io.github.9ins"
+archivesBaseName = "console-input-manager"
+version = "1.0.0"
+sourceCompatibility = 1.8
+compileJava.options.encoding = 'utf-8'
 
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
@@ -20,14 +26,13 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
-group = "io.github.9ins"
-archivesBaseName = "console-input-manager"
-version = "1.0.0"
+artifacts {
+    archives javadocJar, sourcesJar
+}
 
 signing {
     sign configurations.archives
 }
-
 
 uploadArchives {
   repositories {
@@ -45,7 +50,7 @@ uploadArchives {
       pom.project {
         name 'console-input-manager'
         packaging 'jar'
-        description ''
+        description 'This library help you to build Java console input process on your console application with easiest way of way. Also it is provide more effective and easy way of development console application. You can define interactive queries which be need on the application as user input and set up each queries with full-managed way.'
         url 'https://github.com/9ins/console-input-manager'
         scm {
           connection 'scm:svn:https://github.com/9ins/console-input-manager.git'
@@ -70,6 +75,17 @@ uploadArchives {
       }
     }
   }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'chaosgraph',
+                   'Implementation-Version': version
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'utf-8'
 }
 
 repositories {

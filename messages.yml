@@ -1,19 +1,20 @@
+# Console App messages
+
 TRADEMARK_FILE: './trademark'
 VERSION: '4.0.0'
 
-TITLE: 'MVN Repository Downloader'
-PROLOGUE: 'It can be downloaded all of Maven Libraries by using this!'
+TITLE: 'Title of Console Application'
+PROLOGUE: 'This library help you to build your Console Application with very easy way \nAnd manage a queries for Application more easily'
 
-# https://repo.maven.apache.org/maven2/
 QUERYS:
-  QUERY001: 'MVN repository URL: '
-  QUERY002: 'MVN repository ID(central): '
-  QUERY003: 'MVN repository TYPE(default): '
-  QUERY004: 'Do you wanna input more? (y/n) '  
+  MESSAGE001: 'This is message 001'
+  QUERY001: 'This is query 001 : '
+  QUERY002: 'This is query 002 : '
+  QUERY003: 'Do you wanna input again? (y/n)'
   IF001: 'y'
   GOTO001: 'QUERY001'
-  ELSE001: 
-  QUERY005: 'POM file path: '
-  QUERY006: 'IQDesinger HOME path: '  
-  END: 
-  
+  ELSE001:
+  GOTO002: 'END'
+  MESSAGE002: 'This is message 002'
+  CONTINUE: 'Do you wanna continue? (y/n) '    
+  END:
