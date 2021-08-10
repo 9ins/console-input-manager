@@ -21,7 +21,7 @@ You need to download Jar file on **Release menu** in this project and set this l
 
  
 ## Maven dependancy
-```pom
+```xml
 <!-- https://mvnrepository.com/artifact/io.github.9ins/console-input-manager -->
 <dependency>
     <groupId>io.github.9ins</groupId>
