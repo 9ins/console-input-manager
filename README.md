@@ -45,8 +45,14 @@ QUERYS:
   MESSAGE001: 'This is message 001'
   QUERY001: 'This is query 001 : '
   QUERY002: 'This is query 002 : '
+  QUERY003: 'Do you wanna input again? (y/n)'
+  IF001: 'y'
+  GOTO001: 'QUERY001'
+  ELSE001:
+  GOTO002: 'END'
   MESSAGE002: 'This is message 002'
-  CONTINUE: 'Do you wanna continue? (y/n) '
+  CONTINUE: 'Do you wanna continue? (y/n) '    
+  END:
 ```
 
 #### Definition of key of message file
@@ -55,10 +61,15 @@ QUERYS:
 * VERSION: Version of your console application. If you use **@version** variable on trademark file, The variable will be replaced with this key's value.
 * TITLE: Title text which be printed below trademark. It's may be title of your console application.
 * PROLOGUE: This key can be used  as long and detail information of your console application. It could be introduction or snippet of the console application. Line-break can be done by '\n' symbol.
-* QUERYS: This key is section what the separate query be specified for your console application.
-* MESSAGE001: This key will be printed as message while query process. It just print key's value. It must be starting with 'MESSAGE' string.
-* QUERY001: This key is query what a user of console application can input what they choose or input. Later, input value will be included at result Map object.
-* CONTINUE: This key represent whether it's gonna termination of query process. if user input 'n' or 'no', will be exit query and trigger process on  ConsoleTrigger implemented class.
+* QUERYS: This key is section what the separate query be specified for your console application. 
+It's able to use some keyword for expressing informations, queries or logical conditions. Information part is starting with MESSAGE, Query part is starting with QUERY and Logical part is starting with IF, ELSE, GOT, CONTINUE or END.
+* MESSAGE001: This keyword will be able to print as information message. It's printing key's value to STD IO. It must be starting with 'MESSAGE' string.
+* QUERY001: This keyword is query what a user of console application can input what they input in keyboard. Later, input value will be included at result Map object.
+* IF001: This keyword is expressing a condition of upon QUERY. In above sample, if user input is 'y' about QUERY003, it will be goto QUERY001 by GOTO keyword.
+* GOTO001: This keyword is command to move execution position to specified value position.
+* ELSE001: This keyword is executed next keyword if upon IF keyword condition was wrong.
+* CONTINUE: This keyword represent whether gonna termination or restart. if user input 'n' or 'no', will be exit and trigger process on ConsoleTrigger implemented class.
+* END: This keyword represent end of console input process.
 
 
 
@@ -103,11 +114,12 @@ public class SimpleConsoleTest implements ConsoleTrigger {
         this.consoleInput = ConsoleFactory.getDefaultConsoleInput(messageFile, this);
     }
 
-    @Override
-    public void trigger(Map<String, String> inputMap) throws Exception {
+    @Override    
+    public boolean trigger(Map<String, String> inputMap) throws Exception {
         //This will be executed when the query process is done if user didn't choose 'n' or 'no'
         System.out.println("========== Receive input map ==========");
         inputMap.entrySet().stream().forEach(e -> System.out.println("key: "+e.getKey()+"   value: "+e.getValue()));
+        return false; //if true restart console input process, else terminating the process.
     }
 
     @Override
