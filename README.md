@@ -9,23 +9,33 @@
 ## Introduction
 
 This library help you to build Java console input process on your console application with easiest way of way.
-
 Also it's provide more effective and easy way of development console application.
-
 You can define interactive queries which be need on the application as user input and set up each queries with full-managed way.
-
 
 
 ## How to install
 
 To use this library on your application development, You already have to be installed Java Development Environment(JDK)  on your computer.
+Because of being used with **Snake YAML** library, you should get the library on your project classpath. Visit <a herf="https://mvnrepository.com/artifact/org.yaml/snakeyaml">
+You need to download Jar file on **Release menu** in this project and set this library to classpath on your project. Or Set Maven or Gradle dependancy to your project.
+ 
+## Maven dependancy
+```
+<!-- https://mvnrepository.com/artifact/io.github.9ins/console-input-manager -->
+<dependency>
+    <groupId>io.github.9ins</groupId>
+    <artifactId>console-input-manager</artifactId>
+    <version>1.0.1</version>
+</dependency> 
+```
 
-You need to download Jar file on **Release menu** in this project and set this library to classpath on your project.
+## Gradle dependancy
+```
+// https://mvnrepository.com/artifact/io.github.9ins/console-input-manager
+implementation group: 'io.github.9ins', name: 'console-input-manager', version: '1.0.1' 
+```
 
-Because of being used with **Snake YAML** library, you should be got the library on your project classpath.
-
-
-
+ 
 ## How to use
 
 First you have to define a queries what you need at Application. To do this, you should make message file to be querying on the application.
