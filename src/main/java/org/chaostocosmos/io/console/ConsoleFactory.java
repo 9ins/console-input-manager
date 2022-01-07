@@ -1,10 +1,11 @@
 package org.chaostocosmos.io.console;
 
 import java.io.File;
-import java.util.Map;
 
 /**
  * ConsoleFactory class
+ * 
+ * @author 9ins
  */
 public class ConsoleFactory {
 
@@ -17,6 +18,6 @@ public class ConsoleFactory {
      */
     public static ConsoleInput getDefaultConsoleInput(File yamlFile, ConsoleTrigger triggered) throws Exception {
         ConsoleMessageHelper helper = new ConsoleMessageHelper(yamlFile);
-        return new ConsoleInput(helper, triggered);
+        return new ConsoleInput(helper, triggered, false);
     }
 }

@@ -14,7 +14,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 /**
- * ConsoleInput class
+ * ConsoleInput object
+ * 
+ * @author 9ins
  */
 public class ConsoleInput {
 
@@ -34,17 +36,28 @@ public class ConsoleInput {
      * @throws Exception
      */
     public ConsoleInput(ConsoleMessageHelper messageHelper) throws Exception {
-        this(messageHelper, null);
+        this(messageHelper, false);
+    }
+
+    /**
+     * Constructor
+     * @param messageHelper
+     * @param autoStart
+     * @throws Exception
+     */
+    public ConsoleInput(ConsoleMessageHelper messageHelper, boolean autoStart) throws Exception {
+        this(messageHelper, null, autoStart);
     }
 
     /**
      * Constructor
      * @param helper
      * @param trigger
+     * @param autoStart
      * @throws Exception
      */
-    public ConsoleInput(ConsoleMessageHelper helper, ConsoleTrigger trigger) throws Exception {
-        this(helper.getTradeMark(), helper.getTitle(), helper.getPrologue(), helper.getQuerys(), trigger);
+    public ConsoleInput(ConsoleMessageHelper helper, ConsoleTrigger trigger, boolean autoStart) throws Exception {
+        this(helper.getTradeMark(), helper.getTitle(), helper.getPrologue(), helper.getQuerys(), trigger, autoStart);
     }
 
     /**
@@ -54,9 +67,10 @@ public class ConsoleInput {
      * @param prologue
      * @param querys
      * @param trigger
+     * @param autoStart
      * @throws Exception
      */
-    public ConsoleInput(String tradeMark, String title, String prologue, LinkedHashMap<String, Object> querys, ConsoleTrigger trigger) throws Exception {
+    public ConsoleInput(String tradeMark, String title, String prologue, LinkedHashMap<String, Object> querys, ConsoleTrigger trigger, boolean autoStart) throws Exception {
         this.tradeMark = tradeMark;
         this.title = title;
         this.querys = querys;
@@ -68,9 +82,11 @@ public class ConsoleInput {
         this.out.println();
         this.out.println(this.title);
         this.out.println();
-        Arrays.asList(this.prologue.split(Pattern.quote("\\n"))).stream().forEach(l -> this.out.println(l));
+        Arrays.asList(this.prologue.split(Pattern.quote(System.lineSeparator()))).stream().forEach(l -> this.out.println(l));
         this.out.println();
-        startQuery();
+        if(autoStart) {
+            startQuery();
+        }
     }
     
     /**
@@ -84,7 +100,6 @@ public class ConsoleInput {
             Object input = null;
             for(int i=0; i<keys.size(); i++) {
                 String key = keys.get(i);
-                //System.out.println(key+"   "+i);
                 if(Pattern.matches("QUERY\\d+", key)) {
                     input = query(this.reader, this.querys.get(key));
                     if(input == null) {
@@ -106,10 +121,8 @@ public class ConsoleInput {
                 } else if(Pattern.matches("GOTO\\d+", key)) {
                     AtomicInteger idx = new AtomicInteger();
                     int index = keys.stream().peek(v -> idx.incrementAndGet()).anyMatch(k -> k.equals(querys.get(key))) ? idx.get() - 1 : -1;
-                    //System.out.println("-----------------"+index+"  "+key+"  "+querys.get(key));
                     if(index != -1) {
                         i = index - 1;
-                        //System.out.println(i+"   $$$$$$$$$$$$$");
                         continue;
                     }
                 } else if(Pattern.matches("IF\\d+", key) || Pattern.matches("ELSE\\d+", key)) {                                        
@@ -139,6 +152,8 @@ public class ConsoleInput {
                         this.isContinue = false;
                     }
                     break;
+                } else {
+                    map.put(key, this.querys.get(key));
                 }
             }
             if(this.trigger != null) {
@@ -157,8 +172,9 @@ public class ConsoleInput {
 
     /** 
      * Exit
+     * @param status
      */
-    protected void exit(int status) {
+    protected void exit(int status) throws Exception {
         if(status != -1) {
             this.trigger.exit();
         }

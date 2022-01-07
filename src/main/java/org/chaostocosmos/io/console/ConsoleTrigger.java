@@ -18,5 +18,5 @@ public interface ConsoleTrigger {
     /**
      * To be processed if caceled while interactive query.
      */
-    public void exit();
+    public void exit() throws Exception;
 }
