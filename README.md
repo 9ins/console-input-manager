@@ -119,7 +119,7 @@ public class SimpleConsoleTest implements ConsoleTrigger {
 
     SimpleConsoleTest() throws Exception {
         //Create File object for message.yml
-        File messageFile = new File(ConsoleFactory.class.getResource("messages.yml").toURI().getPath());
+        File messageFile = new File("messages.yml");
         //Create ConsoleInput object using ConsoleFactory
         //auto start query process
         this.consoleInput = ConsoleFactory.getDefaultConsoleInput(messageFile, this);
