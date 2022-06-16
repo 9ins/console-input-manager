@@ -10,9 +10,6 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-group = "io.github.9ins"
-archivesBaseName = "console-input-manager"
-version = "1.0.1"
 sourceCompatibility = 1.8
 compileJava.options.encoding = 'utf-8'
 
@@ -33,6 +30,11 @@ artifacts {
 signing {
     sign configurations.archives
 }
+
+group = "io.github.9ins"
+archivesBaseName = "console-input-manager"
+version = "1.0.2"
+
 
 uploadArchives {
   repositories {
@@ -79,7 +81,7 @@ uploadArchives {
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'chaosgraph',
+        attributes 'Implementation-Title': 'console-input-manager',
                    'Implementation-Version': version
     }
 }

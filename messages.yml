@@ -6,15 +6,12 @@ VERSION: '4.0.0'
 TITLE: 'Title of Console Application'
 PROLOGUE: 'This library help you to build your Console Application with very easy way \nAnd manage a queries for Application more easily'
 
-QUERYS:
+QUERYS:  
+  TEST: 'test'
   MESSAGE001: 'This is message 001'
   QUERY001: 'This is query 001 : '
+  TEST1: 'test1'
   QUERY002: 'This is query 002 : '
-  QUERY003: 'Do you wanna input again? (y/n)'
-  IF001: 'y'
-  GOTO001: 'QUERY001'
-  ELSE001:
-  GOTO002: 'END'
   MESSAGE002: 'This is message 002'
-  CONTINUE: 'Do you wanna continue? (y/n) '    
-  END:
+  CONTINUE: 'Do you wanna continue? (y/n) '
+

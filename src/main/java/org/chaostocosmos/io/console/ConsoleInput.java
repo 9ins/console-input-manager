@@ -31,8 +31,8 @@ public class ConsoleInput {
     int exitCode = 0;
 
     /**
-     * Constructor
-     * @param messageHelper
+     * Constructor with ConsoleMessageHelper 
+     * @param messageHelper ConsoleMessageHelper
      * @throws Exception
      */
     public ConsoleInput(ConsoleMessageHelper messageHelper) throws Exception {
@@ -40,8 +40,8 @@ public class ConsoleInput {
     }
 
     /**
-     * Constructor
-     * @param messageHelper
+     * Constructor with ConsoleMessageHelper and condition of auto starting
+     * @param messageHelper ConsoleMessageHelper
      * @param autoStart
      * @throws Exception
      */
@@ -50,10 +50,10 @@ public class ConsoleInput {
     }
 
     /**
-     * Constructor
-     * @param helper
-     * @param trigger
-     * @param autoStart
+     * Constructor with ConsoleMessageHelper and ConsoleTrigger and condition of auto starting
+     * @param helper ConsoleMessageHelper
+     * @param trigger Triggered Object
+     * @param autoStart Whether auto starting
      * @throws Exception
      */
     public ConsoleInput(ConsoleMessageHelper helper, ConsoleTrigger trigger, boolean autoStart) throws Exception {
@@ -62,12 +62,12 @@ public class ConsoleInput {
 
     /**
      * Constructor
-     * @param tradeMark
-     * @param title
-     * @param prologue
-     * @param querys
-     * @param trigger
-     * @param autoStart
+     * @param tradeMark Trademark String
+     * @param title Title of console application
+     * @param prologue Prolog string
+     * @param querys Query Map
+     * @param trigger Triggered object
+     * @param autoStart Whether auto starting
      * @throws Exception
      */
     public ConsoleInput(String tradeMark, String title, String prologue, LinkedHashMap<String, Object> querys, ConsoleTrigger trigger, boolean autoStart) throws Exception {
@@ -88,7 +88,7 @@ public class ConsoleInput {
             startQuery();
         }
     }
-    
+
     /**
      * Start console input query
      * @throws Exception
@@ -172,7 +172,7 @@ public class ConsoleInput {
 
     /** 
      * Exit
-     * @param status
+     * @param status Exit status
      */
     protected void exit(int status) throws Exception {
         if(status != -1) {
@@ -184,8 +184,8 @@ public class ConsoleInput {
 
     /**
      * Query line input
-     * @param reader
-     * @param query
+     * @param reader BufferedReader
+     * @param query Query
      * @return
      * @throws IOException
      */
@@ -196,7 +196,7 @@ public class ConsoleInput {
 
     /**
      * Set trigger object to be continue process.
-     * @param trigger
+     * @param trigger Triggered object
      */
     public void setTrigger(ConsoleTrigger trigger) {
         this.trigger = trigger;

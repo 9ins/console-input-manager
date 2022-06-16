@@ -6,6 +6,10 @@ package org.chaostocosmos.io.console;
 import java.io.File;
 import java.util.Map;
 
+/**
+ * SimpleConsoleTest
+ *  
+ */
 public class SimpleConsoleTest implements ConsoleTrigger { 
 
     ConsoleInput consoleInput;
@@ -16,8 +20,9 @@ public class SimpleConsoleTest implements ConsoleTrigger {
 
     //@Before
     public void createConsoleInputTest() throws Exception {
-        File messageFile = new File("D:\\Github\\console-input-manager\\messages.yml");
-        this.consoleInput = ConsoleFactory.getDefaultConsoleInput(messageFile, this);
+        File messageFile = new File("D:\\0.github\\console-input-manager\\messages.yml");
+        this.consoleInput = ConsoleFactory.getDefaultConsoleInput(null, null, this);
+        this.consoleInput.startQuery();
     }
 
     //@Test
