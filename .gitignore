@@ -5,5 +5,7 @@
 build
 
 gradle.properties
+security.txt
+SonaTypeNexus.pptx
 
 secring.gpg

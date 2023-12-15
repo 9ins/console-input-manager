@@ -14,8 +14,8 @@ public class ConsoleFactory {
      * @param yamlFile Message YAML file
      * @param charset Message YAML charset
      * @param toBeTriggered implemented obejct of ConsoleTrigger
-     * @return
-     * @throws Exception
+     * @return ConsoleInput
+     * @throws Exception throw Exception
      */
     public static ConsoleInput getDefaultConsoleInput(File yamlFile, Charset charset, ConsoleTrigger toBeTriggered) throws Exception {
         return getDefaultConsoleInput(yamlFile, charset, toBeTriggered, false);
@@ -27,8 +27,8 @@ public class ConsoleFactory {
      * @param charset Message YAML charset
      * @param toBeTriggered implemented obejct of ConsoleTrigger
      * @param isAutoStart Whether auto starting
-     * @return
-     * @throws Exception
+     * @return ConsoleInput
+     * @throws Exception throw Exception
      */
     public static ConsoleInput getDefaultConsoleInput(File yamlFile, Charset charset, ConsoleTrigger toBeTriggered, boolean isAutoStart) throws Exception {
         ConsoleMessageHelper helper = new ConsoleMessageHelper(yamlFile, charset);

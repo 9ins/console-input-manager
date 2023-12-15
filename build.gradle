@@ -35,7 +35,6 @@ group = "io.github.9ins"
 archivesBaseName = "console-input-manager"
 version = "1.0.2"
 
-
 uploadArchives {
   repositories {
     mavenDeployer {

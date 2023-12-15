@@ -32,14 +32,14 @@ public class ConsoleMessageHelper {
     private String title;
     private String prologue;
     private LinkedHashMap<String, Object> querys;
-    private String conti;
+    private String exit;
 
     /**
      * Constructor
      * @param yamlFile Message YAML file
      * @param charset Charset
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws IOException  throw Exception
+     * @throws URISyntaxException throw Exception
      */
     public ConsoleMessageHelper(File yamlFile, Charset charset) throws IOException, URISyntaxException {
         this.yamlFile = yamlFile;
@@ -49,8 +49,8 @@ public class ConsoleMessageHelper {
 
     /**
      * Set up 
-     * @throws URISyntaxException
-     * @throws IOException
+     * @throws URISyntaxException throw Exception
+     * @throws IOException throw Exception
      */
     private void setup() throws IOException, URISyntaxException {
         if(this.yamlFile == null || !this.yamlFile.exists()) {
@@ -68,9 +68,9 @@ public class ConsoleMessageHelper {
     /**
      * Extract messages.yml and trademark
      * @param resourceName Resource name
-     * @return
-     * @throws IOException
-     * @throws URISyntaxException
+     * @return return bytes
+     * @throws IOException throw Exception
+     * @throws URISyntaxException throw Exception
      */
     private byte[] loadResourceBytes(String resourceName) throws IOException, URISyntaxException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -98,7 +98,7 @@ public class ConsoleMessageHelper {
     /**
      * Load yaml file
      * @param yamlFile Message YAML file
-     * @throws IOException
+     * @throws IOException throw Exception
      */
     public void load(File yamlFile) throws IOException {
         Yaml yaml = new Yaml();
@@ -116,8 +116,8 @@ public class ConsoleMessageHelper {
         System.out.println(map.get("PROLOGUE"));
         this.title = map.get("TITLE") != null ? map.get("TITLE").toString() : "";
         this.prologue = map.get("PROLOGUE") != null ? map.get("PROLOGUE").toString() : "";
-        this.querys = ((LinkedHashMap<String, Object>)map.get("QUERYS"));
-        this.conti = map.get("CONTINUE") != null ? map.get("CONTINUE").toString() : "";
+        this.querys = ((LinkedHashMap<String, Object>) map.get("QUERYS"));
+        this.exit = map.get("CONTINUE") != null ? map.get("CONTINUE").toString() : "";
     }
 
     /**
@@ -130,7 +130,7 @@ public class ConsoleMessageHelper {
 
     /**
      * Get Yaml file
-     * @return
+     * @return return file
      */
     public File getYamlFile() {
         return this.yamlFile;
@@ -138,7 +138,7 @@ public class ConsoleMessageHelper {
 
     /**
      * Get trademark string(ascii art)
-     * @return
+     * @return return trademark
      */
     public String getTradeMark() {
         return this.tradeMark;
@@ -146,7 +146,7 @@ public class ConsoleMessageHelper {
 
     /**
      * Get title string
-     * @return
+     * @return return title
      */
     public String getTitle() {
         return this.title;
@@ -154,7 +154,7 @@ public class ConsoleMessageHelper {
 
     /**
      * Get prologue string
-     * @return
+     * @return return prologue
      */
     public String getPrologue() {
         return this.prologue;
@@ -162,7 +162,7 @@ public class ConsoleMessageHelper {
 
     /**
      * Get query map
-     * @return
+     * @return return Map
      */
     public LinkedHashMap<String, Object> getQuerys() {
         return this.querys;
@@ -170,18 +170,10 @@ public class ConsoleMessageHelper {
 
     /**
      * Get query matching param
-     * @param queryKey
-     * @return
+     * @param queryKey query key
+     * @return return query
      */
     public String getQuery(String queryKey) {
         return this.querys.get(queryKey)+"";
-    }
-
-    /**
-     * Get continue string
-     * @return
-     */
-    public String getContinue() {
-        return this.conti;
     }
 }
