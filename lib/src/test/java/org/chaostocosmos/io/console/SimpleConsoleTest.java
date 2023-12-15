@@ -21,7 +21,7 @@ public class SimpleConsoleTest implements ConsoleTrigger {
     //@Before
     public void createConsoleInputTest() throws Exception {
         File messageFile = new File("D:\\0.github\\console-input-manager\\messages.yml");
-        this.consoleInput = ConsoleFactory.getDefaultConsoleInput(messageFile, null, this);
+        this.consoleInput = ConsoleFactory.getDefaultConsoleInput(null, null, this);
         this.consoleInput.startQuery();
     }
 

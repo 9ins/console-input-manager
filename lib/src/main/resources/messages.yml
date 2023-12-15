@@ -8,10 +8,13 @@ PROLOGUE: 'This library help you to build your Console Application with very eas
 
 QUERYS:  
   TEST: 'test'
-  MESSAGE001: 'This is message 001'
-  QUERY001: 'This is query 001 : '
+  MESSAGE1: 'This is message 001'
+  QUERY1: 'This is query 001 : '
   TEST1: 'test1'
-  QUERY002: 'This is query 002 : '
-  MESSAGE002: 'This is message 002'
-  CONTINUE: 'Do you wanna continue? (y/n) '
-
+  QUERY2: 'This is query 002 : '
+  MESSAGE2: 'This is message 002'
+  GOTO: 'EXIT'
+  RUN:
+  EXIT: 'Do you wanna continue? (y/n) '
+  EXIT_GRACE:
+  
